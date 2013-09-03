@@ -1,0 +1,88 @@
+Options +SymLinksifOwnerMatch
+Options -Indexes
+RewriteEngine on
+AddDefaultCharset utf-8
+
+#RewriteCond %{SERVER_PORT} !^443$
+#RewriteRule ^(.*)$ https://%{SERVER_NAME}/$1 [L,R=301]
+
+RewriteRule ^.htaccess$ - [F]
+
+#RewriteCond %{HTTP_HOST} ^www.whm.asdat.biz$ [NC]
+#RewriteRule ^(.*)$  https://whm.asdat.biz/$1 [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^chrome=1$
+RewriteRule (.*) index.php?action=home&chrome=1 [L]
+
+RewriteCond %{QUERY_STRING} ^chrome=2$
+RewriteRule (.*) index.php?action=home&chrome=2 [L]
+
+#RewriteCond %{QUERY_STRING} ^act=vk&uid=(*.)&hash=(*.)$
+#RewriteRule ^login\.html?$ /login-%1-.html [L,QSA,R]
+
+RewriteCond %{REQUEST_URI}  ^/login.html$
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^login.html$    /login-vk-%1.html [L,R=301,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*).html$ index.php?action=$1 [L]
+RewriteRule ^tasks/$ index.php?action=tasks [L]
+RewriteRule ^tasks$ index.php?action=tasks [L]
+RewriteRule ^login-(.*)-(.*)-(.*).html$ index.php?action=login&c=$1&rp=$2&email=$3 [L]
+
+
+#----------------------------------------------------------------------------------------
+
+#RewriteCond %{QUERY_STRING} ^/login.html?act=vk&uid=(*.)&hash=(*.)$
+#RewriteRule (.*) index.php?action=login&act=vk&uid=%1&hash=%2 [L]
+
+#RewriteCond %{QUERY_STRING} ^uid=(*.)$
+#RewriteRule ^login\.html$ index.php?action=login&act=vk&uid=%1 [R=302,L]
+
+#RewriteRule ^home.html?chrome=1$ index.php?action=home&chrome=1 [L]
+#RewriteRule ^tasks/(.*).html$ index.php?action=items-$1 [L]
+
+#RewriteRule ^login\.html$ index.php?action=login [L]
+
+#RewriteRule ^(.*)chrome=1$ index.php?chrome=1 [L]
+#RewriteRule ^(.*)-sites.web-help-me.com/(.*)$ web-help-me.com/sites/$1/$2 [L]
+
+#ErrorDocument 404 index.php?action=404
+
+#RewriteRule ^tasks/(.*).html$ index.php?action=tasks&id=$1 [L]
+#RewriteCond tasks/%{REQUEST_FILENAME} !-d
+#RewriteCond tasks/%{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)-(.*)$ index.php?action=sites&ulogin=$1&sid=$2 [L]
+#RewriteRule ^(.*)/(.*)$ index.php?action=sites&ulogin=$1&sid=$2 [L]
+#RewriteRule ^projects/(.*).html$ index.php?action=projects [L]
+#RewriteRule ^home.html$ index.php?action= [L]
+#RewriteRule ^panel$ index.php?p=panel [L]
+
+#RewriteCond %{HTTP_HOST} ^datsko.info
+#RewriteRule (.*) http://www.datsko.info/$1 [R=301,L]
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+#RewriteRule ^index\.php$ http://www.datsko.info/ [R=301,L]
+
+#
+#ErrorDocument 403 http://www.datsko.info/403.php
+
+#RewriteRule ^(.*).css$ /style.css [NC]
+#RewriteRule ^style.css$ - [L]
+#RewriteRule ^(.*)style.css$ style.css [NC]
+#RewriteRule ^(.*)form-style.css$ form-style.css [NC]
+#RewriteRule ^(.*)/img/(.*)$ img/$2 [NC]
+#RewriteRule ^(.*)/portfolio/(.*)$ portfolio/$2 [NC]
+
+#RewriteBase /
+#Rewritecond %{http_host} ^datsko.info [nc]
+
+#RewriteRule ^(.*)/index.html$ index.php?p=$1/index [L]
+#RewriteRule ^(.*)/(.*).html$ index.php?p=$2&lang=$1 [L]
+
+#RewriteRule ^/panel$ https://datsko.info/panel/ [L]
+
+
+
+
+
